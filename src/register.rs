@@ -1,4 +1,4 @@
-struct Registers {
+pub(crate) struct Registers {
     a: u8,
     b: u8,
     c: u8,
@@ -11,8 +11,7 @@ struct Registers {
 
 impl Registers {
     fn get_af(&self) -> u16 {
-        (self.a as u16) << 8
-        | u8::from(self.f) as u16
+        (self.a as u16) << 8 | u8::from(self.f) as u16
     }
 
     fn set_af(&mut self, value: u16) {
@@ -21,8 +20,7 @@ impl Registers {
     }
 
     fn get_bc(&self) -> u16 {
-        (self.b as u16) << 8
-        | self.c as u16
+        (self.b as u16) << 8 | self.c as u16
     }
 
     fn set_bc(&mut self, value: u16) {
@@ -31,8 +29,7 @@ impl Registers {
     }
 
     fn get_de(&self) -> u16 {
-        (self.d as u16) << 8
-        | self.e as u16
+        (self.d as u16) << 8 | self.e as u16
     }
 
     fn set_de(&mut self, value: u16) {
@@ -41,8 +38,7 @@ impl Registers {
     }
 
     fn get_hl(&self) -> u16 {
-        (self.h as u16) << 8
-        | self.l as u16
+        (self.h as u16) << 8 | self.l as u16
     }
 
     fn set_hl(&mut self, value: u16) {
@@ -52,7 +48,7 @@ impl Registers {
 }
 
 #[derive(Clone, Copy)]
-struct FlagsRegister {
+pub(crate) struct FlagsRegister {
     zero: bool,
     subtract: bool,
     half_carry: bool,
@@ -76,10 +72,10 @@ const CARRY_FLAG_BYTE_POSITION: u8 = 4;
 
 impl std::convert::From<FlagsRegister> for u8 {
     fn from(register: FlagsRegister) -> Self {
-        (register.zero as u8) << ZERO_FLAG_BYTE_POSITION |
-        (register.subtract as u8) << SUBTRACT_FLAG_BYTE_POSITION |
-        (register.half_carry as u8) << HALF_CARRY_FLAG_BYTE_POSITION |
-        (register.carry as u8) << CARRY_FLAG_BYTE_POSITION
+        (register.zero as u8) << ZERO_FLAG_BYTE_POSITION
+            | (register.subtract as u8) << SUBTRACT_FLAG_BYTE_POSITION
+            | (register.half_carry as u8) << HALF_CARRY_FLAG_BYTE_POSITION
+            | (register.carry as u8) << CARRY_FLAG_BYTE_POSITION
     }
 }
 
