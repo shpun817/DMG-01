@@ -1,12 +1,12 @@
 pub(crate) struct Registers {
-    a: u8,
-    b: u8,
-    c: u8,
-    d: u8,
-    e: u8,
-    f: FlagsRegister,
-    h: u8,
-    l: u8,
+    pub(crate) a: u8,
+    pub(crate) b: u8,
+    pub(crate) c: u8,
+    pub(crate) d: u8,
+    pub(crate) e: u8,
+    pub(crate) f: FlagsRegister,
+    pub(crate) h: u8,
+    pub(crate) l: u8,
 }
 
 impl Registers {
@@ -49,10 +49,14 @@ impl Registers {
 
 #[derive(Clone, Copy)]
 pub(crate) struct FlagsRegister {
-    zero: bool,
-    subtract: bool,
-    half_carry: bool,
-    carry: bool,
+    /// Set to true if the result of the operation is equal to 0
+    pub(crate) zero: bool,
+    /// Set to true if the operation was a subtraction
+    pub(crate) subtract: bool,
+    /// Set to true if the operation resulted in an overflow from the lower nibble (a.k.a the lower four bits) to the upper nibble (a.k.a the upper four bits)
+    pub(crate) half_carry: bool,
+    /// Set to true if the operation resulted in an overflow
+    pub(crate) carry: bool,
 }
 
 /*
