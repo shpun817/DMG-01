@@ -3,6 +3,11 @@ pub(crate) enum Instruction {
     INC(IncDecTarget),
     RLC(PrefixTarget),
     JP(JumpTest),
+    LD(LoadType),
+    PUSH(StackTarget),
+    POP(StackTarget),
+    CALL(JumpTest),
+    RET(JumpTest),
 }
 
 pub(crate) enum ArithmeticTarget {
@@ -30,6 +35,37 @@ pub(crate) enum JumpTest {
     NotCarry,
     Carry,
     Always,
+}
+
+pub(crate) enum LoadType {
+    Byte(LoadByteTarget, LoadByteSource),
+}
+
+pub(crate) enum LoadByteTarget {
+    A,
+    B,
+    C,
+    D,
+    E,
+    H,
+    L,
+    HLI,
+}
+pub(crate) enum LoadByteSource {
+    A,
+    B,
+    C,
+    D,
+    E,
+    H,
+    L,
+    /// "Direct 8 bit value" - The byte at `pc+1`
+    D8,
+    HLI,
+}
+
+pub(crate) enum StackTarget {
+    BC,
 }
 
 impl Instruction {
